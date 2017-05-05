@@ -21,7 +21,7 @@
 	if ($drawerFlag == "false")
 	{
 		# creating a table for the information of the expenditure details of the organizer
-		$table_name = "expenditure_".$EmailId;
+		/*$table_name = "expenditure_".$EmailId;
 
 		$query = "create table `eventuate`.`$table_name`
 	  	  	  (
@@ -49,7 +49,7 @@
 				`amount_due` integer(6)
 	  	  	  );";
 
-		$result = mysqli_query($con, $query);
+		$result = mysqli_query($con, $query);*/
 
 
 		# inserting the event data into the database

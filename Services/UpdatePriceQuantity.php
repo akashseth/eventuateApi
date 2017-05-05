@@ -6,9 +6,9 @@
  * and open the template in the editor.
  */
 require_once '../database/dbOperation.php';
-class UpdatePrice {
+class UpdatePriceQuantity {
     
-    private $serviceAvailabilityId,$price,$dbOperationObj;
+    private $serviceAvailabilityId,$price,$quantity,$dbOperationObj;
     
     function __construct() {
         $this->dbOperationObj=new dboperation();
@@ -29,17 +29,22 @@ class UpdatePrice {
     {
         $this->price= $this->testInput($_POST['price']);
     }
+    function setQuantity()
+    {
+        $this->quantity= $this->testInput($_POST['quantity']);
+    }
     
-    function updatePrice(){
-        $this->dbOperationObj->updatePrice($this->serviceAvailabilityId, $this->price);
+    function updatePriceQuantity(){
+        $this->dbOperationObj->updatePriceQuantity($this->serviceAvailabilityId, $this->price,$this->quantity);
     }
     
 }
 if(isset($_POST['serviceAvailabilityId']) && $_POST['price']){
-$updatePriceObj = new UpdatePrice();
+$updatePriceObj = new UpdatePriceQuantity();
 $updatePriceObj->setServiceAvailabilityId();
 $updatePriceObj->setPrice();
-$updatePriceObj->updatePrice();
+$updatePriceObj->setQuantity();
+$updatePriceObj->updatePriceQuantity();
 echo 1;
 }
 else {

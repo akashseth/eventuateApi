@@ -7,7 +7,7 @@
 	$EmailId=$_POST['EmailId'];
 	$Sno=$_POST['Sno'];
 
-	$table_name = "expenditure_".$EmailId;
+	$table_name = "expenditure";
 
 	$query = "select * from `eventuate`.`$table_name` where `$table_name`.`sno`='$Sno';";
 

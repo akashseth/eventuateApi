@@ -64,11 +64,11 @@ class dboperation {
         $this->stmt->execute();
         return $this->getMultipleResultantRows();
     }
-    function addAvailability($serviceProviderId,$serviceId,$availabilityName,$price,$imageName) {
+    function addAvailability($serviceProviderId,$serviceId,$availabilityName,$price,$imageName,$quantity) {
         
-        $query="call addAvailability(?,?,?,?)";
+        $query="call addAvailability(?,?,?,?,?)";
         $this->stmt=$this->connectionObj->prepare($query);
-        $this->stmt->bind_param('iisi', $serviceProviderId,$serviceId,$availabilityName,$price);
+        $this->stmt->bind_param('iisii', $serviceProviderId,$serviceId,$availabilityName,$price,$quantity);
         $this->stmt->execute();
         $row = $this->getResultantRow();
         $serviceAvailabilityId = $row['id'];
@@ -94,11 +94,11 @@ class dboperation {
         return $this->getMultipleResultantRows();
     }
     
-     function updatePrice($serviceAvailabilityId,$price) {
+     function updatePriceQuantity($serviceAvailabilityId,$price,$quantity) {
         
-        $query="call updatePrice(?,?)";
+        $query="call updatePriceQuantity(?,?,?)";
         $stmt=$this->connectionObj->prepare($query);
-        $stmt->bind_param('ii', $serviceAvailabilityId,$price);
+        $stmt->bind_param('iii', $serviceAvailabilityId,$price,$quantity);
         $stmt->execute();
     }
     function deleteServiceAvailability($serviceAvailabilityId) {
@@ -125,6 +125,13 @@ class dboperation {
         return $this->getMultipleResultantRows();
     }
     
-   
+   function fetchAvailabilityOrganiser($serviceId) {
+        
+        $query="call fetchAvailabilityOrganiser(?)";
+        $this->stmt=$this->connectionObj->prepare($query);
+        $this->stmt->bind_param('i',$serviceId);
+        $this->stmt->execute();
+        return $this->getMultipleResultantRows();
+    }
             
 }

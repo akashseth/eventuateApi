@@ -8,7 +8,7 @@
 require_once '../database/dbOperation.php';
 class AddAvailability {
     
-    private $serviceProviderId,$serviceId,$availabilityName,$price,$dbOperationObj;
+    private $serviceProviderId,$serviceId,$availabilityName,$price,$quantity,$dbOperationObj;
     public $imageName,$base64;
             
     function __construct() {
@@ -48,16 +48,20 @@ class AddAvailability {
     {
         $this->serviceId= $this->testInput($_POST['serviceId']);
     }
+     function setQuantity()
+    {
+        $this->quantity= $this->testInput($_POST['quantity']);
+    }
     
     function addAvailability(){
-        $this->dbOperationObj->addAvailability($this->serviceProviderId,$this->serviceId, $this->availabilityName,$this->price,  $this->imageName);
+        $this->dbOperationObj->addAvailability($this->serviceProviderId,$this->serviceId, $this->availabilityName,$this->price,  $this->imageName, $this->quantity);
     }
     function setBase64() {
         $this->base64 = $_POST['base64'];
     }
     
 }
-if(isset($_POST['availabilityName']) && $_POST['serviceId']){
+if(isset($_POST['availabilityName']) && isset($_POST['serviceId']) && isset($_POST['quantity']) && isset($_POST['price']) ){
 $addAvailabilityObj = new AddAvailability();
 $addAvailabilityObj->setServiceProviderId();
 $addAvailabilityObj->setAvailabilityName();
@@ -65,6 +69,7 @@ $addAvailabilityObj->setServiceId();
 $addAvailabilityObj->setPrice();
 $addAvailabilityObj->setImageName();
 $addAvailabilityObj->setBase64();
+$addAvailabilityObj->setQuantity();
 
 $imgTest = $addAvailabilityObj->base64;
 

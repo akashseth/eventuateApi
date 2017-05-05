@@ -6,9 +6,9 @@
 
 	$EmailId=$_POST['EmailId'];
 
-	$table_name = "bookings_".$EmailId;
+	$table_name = "bookings";
 
-	$query = "select * from `eventuate`.`$table_name` order by `date` desc;";
+	$query = "select * from `eventuate`.`$table_name` where emailId = '$EmailId' order by `date` desc;";
 
 	$result = mysqli_query($con, $query);
 

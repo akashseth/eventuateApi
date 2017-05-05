@@ -16,7 +16,7 @@
 
 	
 	if($row['EMAIL_ID'] != "")
-		echo json_encode(array("EmailId" => $row['EMAIL_ID'], "UserType" => $row['USER_TYPE'], "PassCode" => $row['PASSCODE']));
+		echo json_encode(array("EmailId" => $row['EMAIL_ID'], "UserType" => $row['USER_TYPE'], "PassCode" => $row['PASSCODE'], "userId" => $row['id']));
 	
 ?>
 

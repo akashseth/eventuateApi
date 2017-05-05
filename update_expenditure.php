@@ -13,7 +13,7 @@
 	$OldAmount=$_POST['OldAmount'];
 
 
-	$table_name = "expenditure_".$EmailId;
+	$table_name = "expenditure";
 
 	#converting date to a proper format
 	$Date = date("Y-m-d", strtotime($date));
@@ -45,11 +45,11 @@
 	elseif($Flag=="false")
 	{
 		#extracting the no. of entries in the table `eventuate`.`$table_name` and hence setting the sno for the new entry
-		$query = "select * from `eventuate`.`$table_name`;";
+		/*$query = "select * from `eventuate`.`$table_name`;";
 		$result = mysqli_query($con, $query);
-		//$Sno = mysqli_num_rows($result)+1;
+		//$Sno = mysqli_num_rows($result)+1;*/
 
-		$query = "insert into `eventuate`.`$table_name` ( `date`, `amount`, `details`) values( '$Date', '$Amount', '$Details');";
+		$query = "insert into `eventuate`.`$table_name` ( `date`, `amount`, `details`,`emailId`) values( '$Date', '$Amount', '$Details','$EmailId');";
 	}
 	
 
