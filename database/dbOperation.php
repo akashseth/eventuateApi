@@ -133,5 +133,31 @@ class dboperation {
         $this->stmt->execute();
         return $this->getMultipleResultantRows();
     }
+     function fetchProfileServices($serviceProviderId) {
+        
+        $query="call getServiceProviderProfile(?)";
+        $this->stmt=$this->connectionObj->prepare($query);
+        $this->stmt->bind_param('i',$serviceProviderId);
+        $this->stmt->execute();
+        return $this->getResultantRow();
+    }
+    function getAvailabilityQuanitityWhileBooking($serviceAvailabilityId,$email) {
+        
+        $query="call getAvailabilityQuanitityWhileBooking(?,?)";
+        $this->stmt=$this->connectionObj->prepare($query);
+        $this->stmt->bind_param('is',$serviceAvailabilityId,$email);
+        $this->stmt->execute();
+        return $this->getResultantRow();
+    }
+    
+    function bookAvailability($amountPaid,$amountDue,$emailId,$providerId,$serviceAvailabilityId,$quantity,$paymentMethod,$eventBudget,$budgetLeft) {
+       $this->stmt->close();
+        $query="call bookAvailability(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt=$this->connectionObj->prepare($query);
+        $stmt->bind_param('iisiiisii', $amountPaid, $amountDue, $emailId, $providerId, $serviceAvailabilityId, $quantity, $paymentMethod,$eventBudget,$budgetLeft);
+        $stmt->execute();
+       
+       
+    }
             
 }

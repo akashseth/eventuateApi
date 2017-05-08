@@ -19,9 +19,9 @@
 		
 		do
 		{
-			$date = date("d-m-Y", strtotime($row[1]));
+			$date = date("d-m-Y", strtotime($row['date']));
 
-			array_push($bookings, array("sno" => $row[0], "date" => $date, "type_service" => $row[2], "name_serviceprovider" => $row[3], "service_specification" => $row[4], "amount_paid" => $row[5], "amount_due" => $row[6]));
+			array_push($bookings, array("sno" => $row['sno'], "date" => $date, "type_service" => $row[2], "name_serviceprovider" => $row[3], "service_specification" => $row[4], "amount_paid" => $row['amount_paid'], "amount_due" => $row['amount_due']));
 		}while($row = mysqli_fetch_array($result));
 
 		echo json_encode(array("bookings" => $bookings ));

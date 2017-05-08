@@ -32,8 +32,11 @@
 
 	$expenditure = $totalExpenditure-$OldAmount+$Amount;
 	$left = $budgetLeft+$OldAmount-$Amount;
-
-	$query = "update `eventuate`.`event_details` set `totalexpenditure`='$expenditure', `budgetleft`='$left' where `event_details`.`email_id`='$EmailId';";
+        if($left<0){
+            $left = 0;
+        }
+           $totalBudget = $_POST['totalBudget'];
+	$query = "update `eventuate`.`event_details` set `totalexpenditure`='$expenditure', `budgetleft`='$left' , `eventbudget`='$totalBudget'where `event_details`.`email_id`='$EmailId';";
 	$result = mysqli_query($con, $query);
 
 
