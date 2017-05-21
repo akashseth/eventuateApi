@@ -37,7 +37,7 @@ class dboperation {
         
         $query = "call editProfile(?,?,?,?)";
         $stmt=$this->connectionObj->prepare($query);
-        $stmt->bind_param('ssss',$userId,$fullName,$address,$mobileNo);
+        $stmt->bind_param('isss',$userId,$fullName,$address,$mobileNo);
         $stmt->execute();
         
     }
@@ -159,5 +159,41 @@ class dboperation {
        
        
     }
+    
+    function fetchServicesProviding($serviceProviderId) {
+        
+        $query="call fetchServicesProviding(?)";
+        $this->stmt=$this->connectionObj->prepare($query);
+        $this->stmt->bind_param('i',$serviceProviderId);
+        $this->stmt->execute();
+        return $this->getMultipleResultantRows();
+    }
+    
+    function updateBookingStatus($bookingStatus, $bookingId) {
+        
+        $query="call updateBookingStatus(?,?)";
+        $stmt=$this->connectionObj->prepare($query);
+        $stmt->bind_param('si', $bookingStatus, $bookingId);
+        $stmt->execute();
+    }
+    
+    function fetchProfileOrg($emailId) {
+        
+        $query="call fetchProfileOrg(?)";
+        $this->stmt=$this->connectionObj->prepare($query);
+        $this->stmt->bind_param('s',$emailId);
+        $this->stmt->execute();
+        return $this->getResultantRow();
+    }
+    function getServiceProviderEmailId($serviceProviderId) {
+        
+        $query="call getServiceProviderEmailId(?)";
+        $this->stmt=$this->connectionObj->prepare($query);
+        $this->stmt->bind_param('i',$serviceProviderId);
+        $this->stmt->execute();
+        return $this->getResultantRow();
+    }
+    
+    
             
 }

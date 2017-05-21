@@ -82,7 +82,7 @@ $imgTest = $addAvailabilityObj->base64;
     fwrite($fp, $imgBase64);
     
     if(fclose($fp) ){
-            echo "Image uploaded";
+           // echo "Image uploaded";
            
     }else{
            $addAvailabilityObj->setImageNameNone("none");

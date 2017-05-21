@@ -10,7 +10,7 @@ require_once '../database/dbOperation.php';
 
 class EditProfile {
     
-    private $fullName,$address,$mobileNo,$userId, $servicesId,$dbOperationObj;
+    private $fullName,$address,$mobileNo,$userId, $servicesId,$dbOperationObj,$leavingServicesId;
     
     function __construct() {
         $this->dbOperationObj = new dboperation();
@@ -44,7 +44,10 @@ class EditProfile {
     {
         $this->servicesId= $this->testInput($_POST['servicesId']);
     }
-    
+    function setLeavingServicesId(){
+        $this->leavingServicesId = $this->testInput($_POST['leavingServicesId']);
+    }
+            
     function getUserId(){
         return $this->userId;
     }
@@ -52,6 +55,10 @@ class EditProfile {
     function getServicesId() {
         
         return $this->servicesId;
+    }
+    
+    function getLeavingServicesId(){
+        return $this->leavingServicesId;
     }
     
     function inserToDatabase() {
@@ -73,20 +80,46 @@ $editProfile->setAddress();
 $editProfile->setMobileNo();
 $editProfile->setUserId();
 $editProfile->setServicesId();
+$editProfile->setLeavingServicesId();
 
 $editProfile->inserToDatabase();
-$editProfile->removePreviousServices();
+
 
 $connection=new DatabaseConnection();
 
+
+$leavingServicesId=explode(',',$editProfile->getLeavingServicesId());
+  foreach($leavingServicesId as $sId){
+    
+    $query= "call deleteServicesProviding(?,?)";
+    $stmt=$connection->prepare($query);
+    $stmt->bind_param("ii", $editProfile->getUserId(),$sId);
+    $stmt->execute();
+       $result = $stmt->get_result();
+        $i=0;
+        while($row=$result->fetch_assoc()) {
+           $serviceAvailabilityId = $row['id'];
+            $stmt->close();
+           $query= "call deleteAvailImag(?)";
+            $stmt=$connection->prepare($query);
+            $stmt->bind_param("i", $serviceAvailabilityId);
+            $stmt->execute();
+            $i++;
+        }
+        $stmt->close();
+  }
+
+  $editProfile->removePreviousServices();
+  
   $servicesId=explode(',',$editProfile->getServicesId());
   foreach($servicesId as $sId){
-      
+       $stmt->close();
     $query= "call updateServicesProviding(?,?)";
     $stmt=$connection->prepare($query);
     $stmt->bind_param("ii", $editProfile->getUserId(),$sId);
     $stmt->execute();
   }
-
+  
+  
 }
 

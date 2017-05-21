@@ -70,8 +70,13 @@ class BookAvailability {
             $this->dbOperationObj->bookAvailability($this->amountPaid, $this->amountDue, 
                     $this->emailId, $this->serviceProviderId, $this->serviceAvailabilityId, 
                     $this->quantity, $this->paymentMethod,$this->eventBudget,$this->budgetLeft);
-           
             
+            $to = $this->dbOperationObj->getServiceProviderEmailId($this->serviceProviderId)['EMAIL_ID'];
+                $subject = 'New Order';
+                $message = 'You have new order open app and check in View bookings'; 
+              
+                // Sending email
+                mail($to, $subject, $message);
             echo json_encode(array("quantityAvailable"=>($quantityAvailable - $this->quantity),"result"=>1));
         }
         else {

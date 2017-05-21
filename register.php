@@ -25,7 +25,14 @@
 		# Generating PASSCODE 
 		//exec('generate_passcode.exe');
 		//$file = fopen("passcode.txt", "r");
-		$newUserPasscode=  rand(1000, 100000);
+		$newUserPasscode=  rand(1000, 10000);
+                
+                $to = $newUserEmailId;
+                $subject = 'Email Verification';
+                $message = 'Your passcode is '.$newUserPasscode.'. Please do not delete this email.'; 
+              
+                // Sending email
+                mail($to, $subject, $message);
 		//fclose($file);
 
 		# insert code for sending this passcode to emailId
