@@ -6,7 +6,7 @@
 
 	$drawerFlag=$_POST['DrawerFlag'];
 	$EmailId=$_POST['Email'];
-	$EventType=$_POST[EventType];
+	$EventType=$_POST['EventType'];
 	$EventDateDayOfMonth=$_POST['EventDateDayOfMonth'];
 	$EventDateMonth=$_POST['EventDateMonth'];
 	$EventDateYear=$_POST['EventDateYear'];
