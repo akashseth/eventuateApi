@@ -3,7 +3,7 @@
 	#php script for connecting to the database EVENTUATE
 
 	$username="root";
-	$password="";
+	$password="eventuate";
 	$host="localhost";
 	$db="eventuate";
 

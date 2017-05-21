@@ -9,7 +9,7 @@ interface databaseInfo {
 
     const serverName="localhost";
     const username="root";
-    const password="";
+    const password="eventuate";
     const databaseName="eventuate";
 }
 
